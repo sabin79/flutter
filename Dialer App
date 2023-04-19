@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+void main(List<String> args) {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: " Dialer App ",
+    home: Homepage(),
+  ));
+}
+
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  var contactlist = [
+    "Sabin Dahal",
+    "Subha Karki ",
+    "sanjib Karki",
+    " julan Rai"
+  ];
+  var phonenumber = ["9861393634", " 9807765096", "9862868472", "9807744029"];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 47, 205, 245),
+        title: Text(
+          'Phone Dialer',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+        itemCount: contactlist.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(Icons.supervised_user_circle),
+            title: Text(contactlist[index]),
+            subtitle: Text(phonenumber[index]),
+            trailing: IconButton(
+                onPressed: () {
+                  // ignore: deprecated_member_use
+                  launch("tel:  ${phonenumber[index]}");
+                },
+                icon: Icon(Icons.call)),
+          );
+        },
+      ),
+    );
+  }
+}
