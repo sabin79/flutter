@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+
+void main(List<String> args) {
+  runApp(MaterialApp(
+    title: "Button NabBar",
+    debugShowCheckedModeBanner: false,
+    home: Mainpage(),
+  ));
+}
+
+class Mainpage extends StatefulWidget {
+  const Mainpage({super.key});
+
+  @override
+  State<Mainpage> createState() => _MainpageState();
+}
+
+class _MainpageState extends State<Mainpage> {
+  int _selectedIndex = 0;
+
+  List<Widget> merowidget = <Widget>[
+    Padding(
+      padding: const EdgeInsets.all(23.0),
+      child: Container(
+        color: Colors.green,
+        width: double.infinity,
+        height: 130,
+        child: Center(
+          child: Text(
+            'Welcome to home Page.',
+            style: TextStyle(fontSize: 23),
+          ),
+          
+        ),
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.all(23.0),
+      child: Container(
+        color: Colors.yellow,
+        height: 300,
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            'Welcome to aboutUs.',
+            style: TextStyle(fontSize: 23),
+          ),
+        ),
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.all(23.0),
+      child: Container(
+        color: Color.fromARGB(255, 39, 88, 113),
+        height: 230,
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            'WElcome to setting',
+            style: TextStyle(fontSize: 23),
+          ),
+        ),
+      ),
+    ),
+  ];
+
+  _onItemTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 57, 181, 198),
+        title: Text('Button Navigation App'),
+      ),
+      body: Center(
+        child: merowidget.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.info), label: " About"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: " Settings")
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTap,
+      ),
+    );
+  }
+}
