@@ -1,0 +1,132 @@
+import 'package:flutter/material.dart';
+
+void main(List<String> args) {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: "Calculator",
+    home: HomePage(),
+  ));
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String p = "", t = "", r = "", result = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Simple Calcualtor'),
+        centerTitle: true,
+        backgroundColor: myColor,
+      ),
+      body: Container(
+        padding: EdgeInsets.all(17),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              onChanged: (val) {
+                p = val;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "enter principal",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(33)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.green,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            // for button
+
+            TextField(
+              onChanged: (val) {
+                t = val;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Enter the time",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(33)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.all(Radius.circular(13))),
+              ),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            TextField(
+              onChanged: (val) {
+                r = val;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  hintText: "Enter the Rate ",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(Radius.circular(33)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.all(Radius.circular(13)),
+                  )),
+            ),
+            SizedBox(
+              height: 17,
+            ),
+            MaterialButton(
+                onPressed: () {
+                  setState(() {
+                    result = (double.parse(p) *
+                            double.parse(t) *
+                            double.parse(r) /
+                            100)
+                        .toString();
+                  });
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(9),
+                    side: BorderSide(color: Colors.deepOrange)),
+                height: 47,
+                color: myColor,
+                child: Text(
+                  'Calaculate',
+                  style: TextStyle(color: Colors.white),
+                )),
+            Center(
+              child: Text(
+                'The result is $result',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+const myColor = Colors.blue;
